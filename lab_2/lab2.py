@@ -18,9 +18,9 @@ def download_images(keyword: str, num_images: int, download_path: str) -> None:
         os.makedirs(download_path)
 
     crawler = GoogleImageCrawler(storage={"root_dir": download_path},
-        feeder_threads=1,
-        parser_threads=2,
-        downloader_threads=4)
+        feeder_threads=1, #Количество потоков для подачи поисковых запросов
+        parser_threads=2, #Количество потоков для обработки HTML страниц с результатами поиска
+        downloader_threads=4) #Количество потоков для загрузки изображений
     crawler.crawl(keyword=keyword, max_num=num_images)
 
 
