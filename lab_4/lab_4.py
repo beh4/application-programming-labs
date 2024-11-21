@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 
 def create_dataframe_from_csv(csv_path: str) -> pd.DataFrame:
     """
-    Load image paths from a CSV file, reads the images, and collects their heights, widths, and depth. It also prints statistical information
-    :param csv_path: The path to the CSV file containing image paths.
-    :return: DataFrame containing image properties, paths and print statistical information
+    Загружает пути к изображениям из файла CSV, считывает изображения и записывает их высоту, ширину и глубину. Также печатает статистическую информацию.
+    :param csv_path: Путь к CSV-файлу, содержащему пути к изображениям.
+    :return: DataFrame, содержащий свойства изображений, пути и статистическую информацию.
     """
     try:
         df = pd.read_csv(csv_path, names=['absolute_path', 'relative_path'])
@@ -45,27 +45,27 @@ def create_dataframe_from_csv(csv_path: str) -> pd.DataFrame:
 
 def filter_dataframe(df: pd.DataFrame, max_height: str, max_width: str)-> pd.DataFrame:
     """
-    Filters the DataFrame based on maximum height and width.
-    :param df: DataFrame containing image properties and paths.
-    :param max_height: The maximum allowed height for the images.
-    :param max_width: The maximum allowed width for the images.
-    :return: A filtered DataFrame containing only images within the specified dimensions.
+    Фильтрует DataFrame по максимальной высоте и ширине.
+    :param df: DataFrame, содержащий свойства и пути изображений.
+    :param max_height: Максимально допустимая высота изображений.
+    :param max_width: Максимально допустимая ширина изображений.
+    :return: Отфильтрованный DataFrame, содержащий только изображения указанных размеров.
     """
     return df[(df['Width'] <= int(max_width)) & (df['Height'] <= int(max_height))]
 
 def add_area_column(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Calculates the area of an image
-    :param df: DataFrame containing image properties and paths.
-    :return: DataFrame containing image properties, paths and areas.
+    Вычисляет площадь изображения
+    :param df: DataFrame, содержащий свойства и пути изображений.
+    :return: DataFrame, содержащий свойства изображений, пути и площади.
     """
     df['Area'] = df['Height'] * df['Width']
     return df
 
 def plot_area_distribution(df: pd.DataFrame) -> None:
     """
-    Draws a histogram by area
-    :param df: DataFrame containing image properties, paths and areas.
+    Рисует гистограмму по площади
+    :param df: DataFrame, содержащий свойства изображений, пути и площади.
     """
     if 'Area' in df.columns:
         df.hist(column="Area", bins=len(df))
